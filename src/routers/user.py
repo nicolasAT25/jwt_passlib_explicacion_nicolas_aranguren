@@ -6,18 +6,18 @@ from typing import List
 from sqlalchemy.orm import Session
 
 router = APIRouter(
-    prefix="/users",
+    prefix="/usuarios",
     tags=["Usuarios"]
 )
 
 @router.get("/", response_model=List[schemas.User])   # Path operation
 def get_users(db: Session = Depends(get_db)):
-    users = db.query(models.User).all()
+    users = db.query(models.Usuario).all()
     return users
 
 @router.get("/{id}", response_model=schemas.User)
 def get_user(id:int, db: Session = Depends(get_db)):
-    user = db.query(models.User).filter(models.User.id == id).first()
+    user = db.query(models.Usuario).filter(models.Usuario.id == id).first()
     
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -30,7 +30,7 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     hashed_password = utils.hash(user.password)
     user.password = hashed_password
     
-    new_user = models.User(**user.model_dump())
+    new_user = models.Usuario(**user.model_dump())
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
@@ -38,7 +38,7 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
 
 @router.delete("/{id}", response_model=schemas.User)
 def delete_user(id:int, db: Session = Depends(get_db)):
-    user_query = db.query(models.User).filter(models.User.id == id)
+    user_query = db.query(models.Usuario).filter(models.Usuario.id == id)
     user_to_delete = user_query.first()
     
     if not user_to_delete:
@@ -52,7 +52,7 @@ def delete_user(id:int, db: Session = Depends(get_db)):
 
 @router.put("/{id}", response_model=schemas.User)
 def update_user(id:int, user:schemas.UserCreate, db: Session = Depends(get_db)):
-    user_query = db.query(models.User).filter(models.User.id == id)
+    user_query = db.query(models.Usuario).filter(models.Usuario.id == id)
     user_to_update = user_query.first()
     
     if not user_to_update:

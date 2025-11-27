@@ -7,7 +7,7 @@ from ..database import get_db
 from sqlalchemy.orm import Session
 
 router = APIRouter(
-    prefix = "/vote",  # Avoid to indicate the path operation root
+    prefix = "/votos",  # Avoid to indicate the path operation root
     tags = ["Votos"]    # Create section in Swagger documentation
     )
 
@@ -18,7 +18,7 @@ def vote(vote: schemas.Vote, db: Session=Depends(get_db), current_user: int = De
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Post con ID {vote.post_id} no existe.')
 
-    vote_query = db.query(models.Vote).filter(models.Vote.post_id == vote.post_id, models.Vote.user_id == current_user.id) # Filters separated by ','
+    vote_query = db.query(models.Voto).filter(models.Voto.post_id == vote.post_id, models.Voto.user_id == current_user.id) # Filters separated by ','
     found_vote = vote_query.first()
     
     if vote.vote_dir == True:
@@ -26,7 +26,7 @@ def vote(vote: schemas.Vote, db: Session=Depends(get_db), current_user: int = De
             raise HTTPException(status_code=status.HTTP_409_CONFLICT,
                                 detail=f'Usuario {current_user.id} ya ha votado en el post {vote.post_id}.')
             
-        new_vote = models.Vote(post_id = vote.post_id, user_id = current_user.id)
+        new_vote = models.Voto(post_id = vote.post_id, user_id = current_user.id)
         db.add(new_vote)
         db.commit()
         return {'message': 'Voto añadido con éxito!'}

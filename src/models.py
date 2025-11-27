@@ -20,7 +20,7 @@ class Post(Base):
     published = Column(Boolean, server_default='TRUE', nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), server_default=text('now()'), nullable=False)
     owner_id = Column(Integer, ForeignKey("usuarios.id", ondelete="CASCADE"), nullable=False) # Hace referencia ala tabla "Usuarios"
-    owner = relationship("User") # Retorna la clase de otro modelo (Usuario). Trae los atributos de Usuario con base en owner_id.
+    owner = relationship("Usuario") # Retorna la clase de otro modelo (Usuario). Trae los atributos de Usuario con base en owner_id.
     
     
 class Voto(Base):
