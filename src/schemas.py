@@ -3,13 +3,13 @@ from pydantic.types import conint
 from datetime import datetime
 from typing import Optional
 
-################# USERS #################
-# Data recieved from the user
+################# USUARIOS #################
+# Data recivida del usuario
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
     
-# Data sent to the user
+# Data enviada al usuario
 class User(BaseModel):
     id: int
     email: EmailStr
@@ -23,25 +23,25 @@ class UserLogin(BaseModel):
     password: str
     
 ################# POSTS #################
-# Data recieved from the user
+# Data recivida del usuario
 class PostBase(BaseModel):
     title: str      
     content: str    
     published: bool = True
 
 class PostCreate(PostBase):
-    pass                # Inherits all from PostBase
+    pass
 
-# Data sent to the user
-class Post(PostBase): # Inherit the other fields to return
+# Data enviada al usuario
+class Post(PostBase):
     id: int
     created_at: datetime
     owner: User
 
     class Config:
-        from_attributes = True #This solves the issue when we send a ORM object as a responde (pydantic BaseModel).
+        from_attributes = True
 
-# Data sent to the user with votes
+# Data enviada al usuario with votes
 class PostOut(BaseModel):
     Post: Post
     votes: int
@@ -54,18 +54,17 @@ class UserLogin(BaseModel):
     email: EmailStr
     password: str
     
-# Data recieved from the user and sent to the user
+# Data recivida del usuario y enviada al usuario
 class Token(BaseModel):
     access_token : str
     token_type: str
     
-# Used to verify the token in oauth2.py
+# Usada para verificar el TOKEN en oauth2.py
 class TokenData(BaseModel):
     id: Optional[int] = None
     
 ################# VOTES #################
-# Data recieved from user
+# Data recivida del usuario
 class Vote(BaseModel):
     post_id: int
     vote_dir: Optional[bool]
-    # vote_dir: conint(ge=0, le=1)  # vote direction validates 0 or 1.

@@ -5,14 +5,14 @@ from .routers import post, user, vote, auth
 
 from .database import engine
 
-models.Base.metadata.create_all(bind=engine)   # Creates all models in the DB. Used in Render deployment. Commented after Alembic implementation.
+models.Base.metadata.create_all(bind=engine)   # Crea todos los modelos en la DB.
 
-app = FastAPI(title="Social Media App / NAT")
+app = FastAPI(title="Red Social / NAT")
 
-origins = ["*"]     # All domains allowed.
+origins = ["*"]
 
 app.add_middleware(
-    CORSMiddleware,         # Function that runs before every request
+    CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
@@ -26,5 +26,4 @@ app.include_router(auth.router)
 
 @app.get("/")
 def root():
-    # return {"message": "Successfully deployed from CI/CD pipeline !"}
-    return {"message": "Pushing out to Ubuntu 😀"}
+    return {"mensaje": "Bienvenido! 😀"}

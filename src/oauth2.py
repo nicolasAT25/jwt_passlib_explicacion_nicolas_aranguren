@@ -22,7 +22,7 @@ def create_access_token(data:dict): # When the user log in.
 
     return encoded_jwt
 
-def verify_acces_token(token:str, credentials_exception):    # When the user make a request
+def verify_acces_token(token:str, credentials_exception):    # Cuando el usuario hace una solicitud
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         id:str =payload.get("user_id")
@@ -37,7 +37,7 @@ def verify_acces_token(token:str, credentials_exception):    # When the user mak
     
     return token_data
     
-def get_current_user(token:str = Depends(oauth2_scheme), db: Session = Depends(database.get_db)):   # Make sure the user logged in.
+def get_current_user(token:str = Depends(oauth2_scheme), db: Session = Depends(database.get_db)):   # Se asegura que el usuario hizo log in.
     credentials_exception = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Could not validate credentials",
                                           headers={"WWW-Authenticate": "Bearer"})
     

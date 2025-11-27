@@ -14,7 +14,6 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
-# Dependency. Every time a request is recieved a session is created an then closed.
 def get_db():
     db = SessionLocal()
     try:
