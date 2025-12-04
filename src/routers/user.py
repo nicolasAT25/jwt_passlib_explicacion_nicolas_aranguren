@@ -60,6 +60,7 @@ def update_user(id:int, user:schemas.UserCreate, db: Session = Depends(get_db)):
                             detail=f"Usuario con ID {id} no existe.")
         
     user_query.update(**user.model_dump(), synchronize_session=False)
+    print(user_to_update)
     db.commit()
     
     return user_query.first()

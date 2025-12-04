@@ -12,7 +12,7 @@ SECRET_KEY = settings.secret_key
 ALGORITHM = settings.algorithm
 ACCESS_TOKEN_EXPIRE_MINUTES = settings.access_token_expire_minutes
 
-def create_access_token(data:dict): # When the user log in.
+def create_access_token(data:dict):
     to_encode = data.copy()
     
     expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -43,6 +43,6 @@ def get_current_user(token:str = Depends(oauth2_scheme), db: Session = Depends(d
     
     token = verify_acces_token(token, credentials_exception)
     
-    user = db.query(models.User).filter(models.User.id == token.id).first()
+    user = db.query(models.Usuario).filter(models.Usuario.id == token.id).first()
     
     return user
