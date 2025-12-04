@@ -26,7 +26,7 @@ El proceso de autenticación consta de los siguientes pasos:
 
     - Para su verificación se toma el ***access token***, se decodifica utilizando de nuevo el ***Secret Key*** y se retorna el ***user_id***. Si no es posible extraer el ***user_id*** se muestra una excepción.
 
-# `Descripción del uso de Passlib`
+# **Descripción del uso de Passlib** 🔑
 
 ***Passlib*** permite utilizar diferentes algoritmos para aplicar un ***hash*** a las contraseñas.
 
@@ -36,7 +36,7 @@ El proceso de autenticación consta de los siguientes pasos:
 
 - Esta verificación la realiza el método ***verify*** de la clase ***CryptContext***.
 
-# `Ejemplo Payload JWT generado`
+# **Ejemplo Payload JWT generado** 🔒
 
 ```python
 Ejemplo
@@ -51,7 +51,7 @@ Ejemplo
 }
 ```
 
-# 💡 `Conclusiones` 💡
+# 💡 **Conclusiones** 💡
 
 ## Seguridad
 
