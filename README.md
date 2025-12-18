@@ -72,3 +72,7 @@ Ejemplo
 - La implementación de **DBs**, **JWT**, **Passlib** aprendida durante este proyecto es replicable a diferentes casos de negocio donde la creación y autenticación de usuarios sea requerida.
 
 - Implementar la dependencia de conexión a la DB y/o autenticación de usuarios para acceder a las operaciones o serviciios de nuestras APIs garantiza la seguridad y consistencia de los proyectos.
+
+# Link video explicativo 🎥
+
+[Proyecto Final Módulo 7](https://drive.google.com/file/d/16lBaEUds16bPw4xs2eeE4RvORgX03LrH/view?usp=sharing)
